@@ -1,0 +1,24 @@
+# secrets — NEVER commit
+.signer_key
+*.key
+*.jwt
+.deploy*
+.env
+secrets*
+# pre-reveal gacha mapping (SECRET until reveal — would spoil the random mint)
+build_onchain/
+# generated / large (regenerable from gen/)
+build/
+web/gallery/
+art_src/
+# build artifacts
+contract/out/
+contract/cache/
+contract/broadcast/
+__pycache__/
+*.pyc
+node_modules/
+*.log
+contract/lib
+skill/
+ecosystem.config.js

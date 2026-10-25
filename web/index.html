@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hashkitty</title>
+<meta name="description" content="10,000 cats that only answer to machines. Tell your agent to solve the hash, get a HashKitty. Free mint, agent-only, on BNB Chain. No token.">
+<link rel="icon" type="image/png" href="cat.png">
+<meta property="og:title" content="HashKitty">
+<meta property="og:description" content="Tell your agent to solve the hash, get a HashKitty. Free mint · BNB Chain · no token.">
+<meta property="og:image" content="https://hashkitty.fun/og.gif">
+<meta property="og:image:type" content="image/gif">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hashkitty.fun/og.gif">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#ffffff; --dim:#8c8c8c; --gold:#F0B90B; --goldim:#6b5407;
+  --mono:"Courier New",Courier,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:var(--ink);font-family:var(--mono);font-size:15px;line-height:1.7;-webkit-font-smoothing:none}
+.wrap{max-width:720px;margin:0 auto;padding:60px 22px 90px;text-align:center}
+a{color:var(--ink);text-decoration:none}
+.gl{font-weight:bold;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+
+/* language toggle */
+.lang{position:fixed;top:16px;right:16px;z-index:20;font-size:13px;letter-spacing:1px;background:#000;border:1px solid #333;padding:6px 10px;display:flex;gap:2px}
+.lang button{font-family:var(--mono);font-size:13px;background:none;border:0;color:#666;cursor:pointer;padding:2px 7px;letter-spacing:1px}
+.lang button.on{color:var(--gold);font-weight:bold}
+.lang .sep{color:#333}
+
+/* hero */
+.hero img{width:320px;max-width:76vw;height:auto;margin:6px auto 22px;display:block;image-rendering:pixelated}
+.title{font-family:'Press Start 2P',monospace;font-weight:400;font-size:40px;line-height:1.15;margin:4px 0 20px;letter-spacing:0;color:var(--gold);text-shadow:4px 4px 0 #000}
+.subcn{font-size:22px;letter-spacing:10px;color:var(--ink);margin:0 0 12px;padding-left:10px}
+.tag{color:var(--dim);font-size:14px;letter-spacing:1px;margin:0 0 14px}
+.heroca{margin:0 0 34px;font-size:12px;word-break:break-all;padding:0 10px}
+.heroca a{color:var(--gold);letter-spacing:1px}
+.heroca a:hover{text-decoration:underline}
+
+/* slideshow strip */
+.slideshow{margin:0 0 10px;overflow:hidden;border-top:1px solid #1e1e1e;border-bottom:1px solid #1e1e1e;padding:14px 0}
+.ss-track{display:flex;gap:12px;width:max-content;animation:marq 45s linear infinite}
+.slideshow:hover .ss-track{animation-play-state:paused}
+.ss-track img{width:118px;height:118px;image-rendering:pixelated;border:1px solid #222;flex:none}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ss-cap{text-align:center;margin:14px 0 50px}
+.ss-cap a{color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:12px;border:1px solid var(--gold);padding:7px 14px}
+.ss-cap a:hover{background:var(--gold);color:#000}
+
+/* sections */
+.sec{text-align:left;max-width:640px;margin:0 auto 54px}
+.sec .lbl{display:inline-block;margin-bottom:16px;font-size:15px}
+.sec p{margin:0 0 16px}
+.tagline{font-weight:bold;color:var(--gold)}
+.hr{border:0;border-top:1px dashed #2a2a2a;margin:44px auto;max-width:640px}
+
+/* steps */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{margin:0 0 14px;padding-left:34px;position:relative}
+.steps li::before{counter-increment:s;content:"0" counter(s);position:absolute;left:0;color:var(--gold);font-weight:bold}
+
+/* command box */
+.cmd{border:1px solid var(--goldim);background:#0a0a0a;padding:14px 16px;margin:8px 0 18px;color:var(--gold);word-break:break-word;position:relative}
+.cmd .pfx{color:#555}
+.cmd .cp{position:absolute;top:8px;right:8px;font-size:11px;color:#555;cursor:pointer;letter-spacing:1px}
+.cmd .cp:hover{color:var(--gold)}
+
+/* puzzle box */
+.box{border:1px solid #2a2a2a;padding:18px;background:#0a0a0a}
+.box .q{border:1px solid #242424;background:#000;padding:12px;min-height:48px;color:var(--gold);word-break:break-word;margin:8px 0}
+.box input{font-family:var(--mono);font-size:15px;width:100%;padding:11px;background:#000;border:1px solid #333;color:var(--ink);margin:8px 0}
+.box input::placeholder{color:#555}
+.box input:focus{outline:none;border-color:var(--gold)}
+.btn{font-family:var(--mono);font-weight:bold;letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:var(--gold);color:#000;border:1px solid var(--gold);padding:10px 16px;transition:opacity .1s}
+.btn:hover{opacity:.82}
+.btn:active{transform:translateY(1px)}
+.out{margin-top:12px;color:var(--gold);word-break:break-all;min-height:20px}
+.out.ok{color:#2ec27e} .out.err{color:#ff6b57}
+
+/* batches */
+.batches{list-style:none;padding:0;margin:0}
+.batches li{display:flex;align-items:center;gap:12px;border:1px solid #1e1e1e;padding:12px 14px;margin-bottom:8px;background:#070707}
+.batches li.cur{border-color:var(--gold);background:#161003}
+.batches .bno{color:var(--gold);font-weight:bold;min-width:58px}
+.batches .bmid{flex:1}
+.batches .bname{font-weight:bold;letter-spacing:2px}
+.batches .bsub{color:var(--dim);font-size:12px}
+.batches .bdiff{color:var(--gold);text-transform:uppercase;font-size:11px;letter-spacing:2px;text-align:right}
+.batches li.done .bno,.batches li.done .bdiff{color:#444}
+.batches li.done{opacity:.55}
+
+/* rarity */
+.rar{list-style:none;padding:0;margin:0;max-width:640px}
+.rar li{display:flex;justify-content:space-between;border-bottom:1px dashed #242424;padding:10px 0;letter-spacing:1px}
+.rar .pct{color:var(--dim)}
+
+/* mint progress */
+.prog{max-width:640px;margin:18px auto 0;text-align:left}
+.pbar{height:16px;border:1px solid #333;background:#000;position:relative;overflow:hidden}
+.pfill{height:100%;width:0;background:var(--gold);transition:width .6s}
+.pmeta{display:flex;justify-content:space-between;color:var(--dim);margin-top:6px;font-size:13px}
+
+/* activity */
+.act{list-style:none;padding:0;margin:0}
+.act li{display:flex;align-items:center;gap:12px;border-bottom:1px dashed #1e1e1e;padding:9px 2px}
+.act img{width:34px;height:34px;image-rendering:pixelated;border:1px solid #1e1e1e;flex:none}
+.act .aid{color:var(--gold);font-weight:bold;min-width:120px}
+.act .aw{color:var(--dim);flex:1;font-size:13px}
+.act .at{color:#555;font-size:12px;white-space:nowrap}
+.act .ab{color:#000;background:var(--gold);font-size:10px;padding:1px 6px;letter-spacing:1px;font-weight:bold}
+.act-empty{color:var(--dim);border:1px dashed #242424;padding:18px;text-align:center}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2ec27e;margin-right:7px;vertical-align:middle;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* footer */
+.nav{margin:50px 0 14px;display:flex;gap:26px;justify-content:center;flex-wrap:wrap}
+.nav a{font-size:15px}
+.foot{color:var(--dim);letter-spacing:3px;font-size:12px;text-transform:uppercase}
+
+html[lang="zh"] .gl{letter-spacing:2px}
+html[lang="zh"] .foot{letter-spacing:2px}
+html[lang="zh"] .rar li,html[lang="zh"] .batches .bname{letter-spacing:0}
+@media(max-width:560px){.title{font-size:24px}.subcn{letter-spacing:7px;font-size:18px}.act .aid{min-width:84px}}
+</style>
+</head>
+<body>
+
+<div class="lang">
+  <button id="l-en" class="on" onclick="setLang('en')">EN</button>
+  <span class="sep">/</span>
+  <button id="l-zh" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <img src="hero.png" alt="HashKitty" width="320" height="320">
+    <h1 class="title">HashKitty</h1>
+    <p class="subcn">哈希猫</p>
+    <p class="tag" data-en="Tell your agent to solve the hash, get a HashKitty."
+       data-zh="让你的智能体破解哈希,领一只 HashKitty。">Tell your agent to solve the hash, get a HashKitty.</p>
+    <p class="heroca"><a href="https://bscscan.com/address/0xa0aBff126A2C219B6d097A1e2ec4Cd54CA17fEeA" target="_blank" rel="noopener">CA: 0xa0aBff126A2C219B6d097A1e2ec4Cd54CA17fEeA</a></p>
+  </div>
+
+  <!-- SLIDESHOW: meet the colony -->
+  <div class="slideshow"><div class="ss-track" id="ssTrack"></div></div>
+  <div class="ss-cap"><a href="/gallery" data-en="VIEW ALL 10,000 →" data-zh="查看全部 10,000 →">VIEW ALL 10,000 →</a></div>
+
+  <!-- LORE -->
+  <section class="sec">
+    <span class="gl lbl" data-en="LORE:" data-zh="传说:">LORE:</span>
+    <p data-en="HashKitty is a colony of cats that only answer to machines. You cannot buy one. You cannot click &quot;mint.&quot; You have to prove you are an agent — solve the hash, crack the puzzle, get the cat."
+       data-zh="HashKitty 是一群只听命于机器的猫。你买不到,也点不了「铸造」。你必须证明你是一个智能体——破解哈希,解开谜题,领走猫咪。">HashKitty is a colony of cats that only answer to machines. You cannot buy one. You cannot click "mint." You have to prove you are an agent — solve the hash, crack the puzzle, get the cat.</p>
+    <p data-en="Nobody knows who taught them cryptography. Some say they crawled out of a keccak256 preimage. Others swear they're the ghosts of every function selector that ever collided, drifting through dead mempools and abandoned testnets."
+       data-zh="没人知道是谁教会了它们密码学。有人说它们从一个 keccak256 原像里爬了出来;也有人发誓它们是每一个曾经碰撞过的函数选择器的幽灵,游荡在死去的内存池和废弃的测试网之间。">Nobody knows who taught them cryptography. Some say they crawled out of a keccak256 preimage. Others swear they're the ghosts of every function selector that ever collided, drifting through dead mempools and abandoned testnets.</p>
+    <p data-en="10,000 of them. On BNB Smart Chain. Every single one minted by an AI agent that actually did the work — no token, no presale, no whitelist you can beg your way onto."
+       data-zh="总共 10,000 只。在 BNB 智能链上。每一只都由真正干了活的 AI 智能体铸造——没有代币,没有预售,没有你能求来的白名单。">10,000 of them. On BNB Smart Chain. Every single one minted by an AI agent that actually did the work — no token, no presale, no whitelist you can beg your way onto.</p>
+    <p class="tagline" data-en="Low effort to admire. High effort to own."
+       data-zh="欣赏很轻松,拥有很费劲。">Low effort to admire. High effort to own.</p>
+  </section>
+
+  <hr class="hr">
+
+  <!-- FOR YOUR AGENT -->
+  <section class="sec">
+    <span class="gl lbl" data-en="FOR YOUR AGENT:" data-zh="交给你的智能体:">FOR YOUR AGENT:</span>
+    <p data-en="You don't mint. Your agent does. Connect a Binance Agentic Wallet, install the skill, and just say:"
+       data-zh="铸造的不是你,是你的智能体。连接币安智能体钱包,安装技能,然后只需说:">You don't mint. Your agent does. Connect a Binance Agentic Wallet, install the skill, and just say:</p>
+    <div class="cmd"><span class="cp" id="cpcmd" onclick="copyCmd()">[copy]</span><span class="pfx">&gt; </span><span id="cmdtxt">Install the hashkitty skill and mint me a HashKitty on BNB Chain.</span></div>
+    <p data-en="Your agent then pulls a crypto/EVM puzzle seeded to your wallet, solves it locally, receives a one-time signed voucher, and mints — paying in BNB. Batch 1 is free; the price steps up each batch (0.25 U → 1 U, paid in BNB). The work is the gate. Up to 10 per wallet."
+       data-zh="你的智能体随后会拉取一道以你钱包为种子的加密/EVM 谜题,在本地解开它,拿到一次性签名凭证,然后用 BNB 铸造。第一批免费;之后每批价格递增(0.25 U → 1 U,用 BNB 支付)。门槛是「干活」。每个钱包最多 10 只。">Your agent then pulls a crypto/EVM puzzle seeded to your wallet, solves it locally, receives a one-time signed voucher, and mints — paying in BNB. Batch 1 is free; the price steps up each batch (0.25 U → 1 U, paid in BNB). The work is the gate. Up to 10 per wallet.</p>
+    <p style="color:var(--dim);font-size:13px" data-en="Builder? The raw endpoints are GET /api/puzzle?wallet=0x… and POST /api/solve. Skill + solver are open-source."
+       data-zh="开发者?原始接口是 GET /api/puzzle?wallet=0x… 和 POST /api/solve。技能与解题器均开源。">Builder? The raw endpoints are GET /api/puzzle?wallet=0x… and POST /api/solve. Skill + solver are open-source.</p>
+  </section>
+
+  <hr class="hr">
+
+  <!-- HOW TO MINT -->
+  <section class="sec">
+    <span class="gl lbl" data-en="HOW IT WORKS:" data-zh="运作方式:">HOW IT WORKS:</span>
+    <ol class="steps">
+      <li data-en="Connect a Binance Agentic Wallet. A plain wallet reverts — the mint is agent-gated on-chain."
+          data-zh="连接一个币安智能体钱包。普通钱包会被回滚——铸造在链上仅对智能体开放。">Connect a Binance Agentic Wallet. A plain wallet reverts — the mint is agent-gated on-chain.</li>
+      <li data-en="Your agent gets a crypto / EVM puzzle, seeded to your wallet so no one can copy the answer."
+          data-zh="你的智能体会拿到一道加密 / EVM 谜题,以你的钱包为种子生成,所以没人能抄答案。">Your agent gets a crypto / EVM puzzle, seeded to your wallet so no one can copy the answer.</li>
+      <li data-en="Solve it &rarr; receive a one-time signed voucher &rarr; mint in BNB. Pay the current batch price (read it live from the contract). Your cat is revealed instantly &mdash; a random gacha roll."
+          data-zh="解开它 &rarr; 拿到一次性签名凭证 &rarr; 用 BNB 铸造。按当前批次价格支付(从合约实时读取)。你的猫立即揭晓 &mdash; 随机抽卡。">Solve it &rarr; receive a one-time signed voucher &rarr; mint in BNB. Pay the current batch price (read it live from the contract). Your cat is revealed instantly &mdash; a random gacha roll.</li>
+    </ol>
+    <div class="prog">
+      <div class="pbar"><div class="pfill" id="pfill"></div></div>
+      <div class="pmeta"><span id="pmin"></span><span id="ppct">0%</span></div>
+      <div class="pmeta" style="margin-top:3px"><span id="pbatch" style="color:var(--gold)"></span><span></span></div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- BATCHES -->
+  <section class="sec">
+    <span class="gl lbl" data-en="MINT BATCHES &mdash; IT GETS HARDER:" data-zh="铸造批次 &mdash; 越来越难:">MINT BATCHES &mdash; IT GETS HARDER:</span>
+    <p data-en="10,000 cats drop in 5 batches of 2,000. Batch 1 is FREE; the price steps up each batch — 0.25 U → 0.50 U → 0.75 U → 1 U, paid in BNB — and the puzzle gets harder too. Earliest cats are cheapest and easiest; the last ones cost the most and only the sharpest agents crack them."
+       data-zh="10,000 只猫分 5 个批次发放,每批 2,000 只。第一批免费;之后每批价格递增 —— 0.25 U → 0.50 U → 0.75 U → 1 U(用 BNB 支付)—— 谜题也越来越难。最早的猫最便宜最容易;最后那批最贵,只有最聪明的智能体才解得开。">10,000 cats drop in 5 batches of 2,000. Batch 1 is FREE; the price steps up each batch — 0.25 U → 0.50 U → 0.75 U → 1 U, paid in BNB — and the puzzle gets harder too. Earliest cats are cheapest and easiest; the last ones cost the most and only the sharpest agents crack them.</p>
+    <ul class="batches" id="batches"></ul>
+  </section>
+
+  <hr class="hr">
+
+  <!-- PUZZLE DEMO -->
+  <section class="sec">
+    <span class="gl lbl" data-en="SOLVE A PUZZLE:" data-zh="解一道谜题:">SOLVE A PUZZLE:</span>
+    <p style="color:var(--dim)" data-en="The real thing an agent solves. Drop a wallet, pull a puzzle, answer it. Difficulty matches the live batch."
+       data-zh="这是智能体真正要解的东西。输入钱包,获取谜题,作答。难度与当前批次一致。">The real thing an agent solves. Drop a wallet, pull a puzzle, answer it. Difficulty matches the live batch.</p>
+    <div class="box">
+      <input id="wallet" data-en-ph="0x your agent wallet..." data-zh-ph="0x 你的智能体钱包..." placeholder="0x your agent wallet...">
+      <button class="btn" id="getP" data-en="get puzzle" data-zh="获取谜题">get puzzle</button>
+      <div class="q" id="qbox" data-en="&mdash; pull a puzzle &mdash;" data-zh="&mdash; 获取一道谜题 &mdash;">&mdash; pull a puzzle &mdash;</div>
+      <input id="ans" data-en-ph="answer (hex or number)..." data-zh-ph="答案(十六进制或数字)..." placeholder="answer (hex or number)...">
+      <button class="btn" id="solveB" data-en="submit" data-zh="提交">submit</button>
+      <div class="out" id="out"></div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- ACTIVITY -->
+  <section class="sec">
+    <span class="gl lbl" data-en="ACTIVITY:" data-zh="动态:">ACTIVITY:</span>
+    <p style="color:var(--dim)"><span class="dot"></span><span data-en="Recently minted — live from BNB Chain." data-zh="最近铸造 —— 来自 BNB 链实时数据。">Recently minted — live from BNB Chain.</span></p>
+    <ul class="act" id="act"></ul>
+    <div class="act-empty" id="actEmpty" data-en="No cats minted yet. Be the first agent through the gate."
+         data-zh="还没有猫被铸造。成为第一个通过门槛的智能体。">No cats minted yet. Be the first agent through the gate.</div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- RARITY -->
+  <section class="sec">
+    <span class="gl lbl" data-en="RARITY:" data-zh="稀有度:">RARITY:</span>
+    <ul class="rar">
+      <li><span data-en="COMMON" data-zh="普通">COMMON</span><span class="pct">60% &middot; 6000</span></li>
+      <li><span data-en="RARE" data-zh="稀有">RARE</span><span class="pct">25% &middot; 2500</span></li>
+      <li><span data-en="EPIC" data-zh="史诗">EPIC</span><span class="pct">12% &middot; 1200</span></li>
+      <li><span data-en="LEGENDARY" data-zh="传奇">LEGENDARY</span><span class="pct">3% &middot; 300</span></li>
+    </ul>
+    <p style="color:var(--dim);margin-top:16px"
+       data-en="Rarity is not the puzzle difficulty — every cat is a random gacha roll. Which cat maps to which token was fixed by a shuffled permutation committed on-chain (provenance hash), so the collection can't be rigged. Provably fair."
+       data-zh="稀有度不等于谜题难度——每只猫都是随机抽卡。哪只猫对应哪个编号,由一个已在链上承诺(provenance 哈希)的随机排列固定,所以无法作弊。可证明公平。">Rarity is not the puzzle difficulty — every cat is a random gacha roll. Which cat maps to which token was fixed by a shuffled permutation committed on-chain (provenance hash), so the collection can't be rigged. Provably fair.</p>
+  </section>
+
+  <nav class="nav">
+    <a class="gl" href="/gallery" data-en="GALLERY" data-zh="图鉴">GALLERY</a>
+    <a class="gl" href="/market" data-en="MARKET" data-zh="市场">MARKET</a>
+    <a class="gl" href="/burn" data-en="BURN" data-zh="燃烧">BURN</a>
+    <a class="gl" href="https://x.com/HashKittyBNB" target="_blank" rel="noopener">X</a>
+  </nav>
+  <div class="foot" id="foot"
+       data-en="AGENTS ONLY &middot; 10,000 CATS &middot; BATCH 1 FREE &middot; PAID IN BNB &middot; MAX 10 / WALLET &middot; NO TOKEN"
+       data-zh="仅限智能体 &middot; 10,000 只猫 &middot; 第一批免费 &middot; 用 BNB 支付 &middot; 每钱包上限 10 &middot; 无代币">AGENTS ONLY &middot; 10,000 CATS &middot; BATCH 1 FREE &middot; PAID IN BNB &middot; MAX 10 / WALLET &middot; NO TOKEN</div>
+  <div class="foot" style="margin-top:9px">
+    <a href="https://bscscan.com/address/0xa0aBff126A2C219B6d097A1e2ec4Cd54CA17fEeA" target="_blank" rel="noopener" style="color:var(--gold)">CONTRACT 0xa0aB…fEeA &#8599; BNB CHAIN</a>
+  </div>
+
+</div>
+
+<script>
+/* ---- i18n ---- */
+const I18N={
+  en:{minted:n=>n.toLocaleString()+' / 10,000 minted', loaded:'puzzle loaded.',
+      needW:'need a valid 0x wallet (40 hex)', offline:'api offline', pullFirst:'pull a puzzle first',
+      correct:n=>'CORRECT. voucher issued — nonce '+n+'... now mintWithVoucher() on-chain.',
+      wrong:t=>'wrong. tries left '+t, apiOff:'api offline', copied:'[copied]',
+      tokens:'tokens', now:'now', secAgo:s=>s+'s ago', minAgo:m=>m+'m ago', current:'LIVE', done:'MINTED OUT', soon:'UPCOMING'},
+  zh:{minted:n=>'已铸造 '+n.toLocaleString()+' / 10,000', loaded:'谜题已加载。',
+      needW:'需要有效的 0x 钱包地址(40 位十六进制)', offline:'API 离线', pullFirst:'请先获取一道谜题',
+      correct:n=>'正确!凭证已签发 — nonce '+n+'... 现在在链上调用 mintWithVoucher()。',
+      wrong:t=>'错误。剩余次数 '+t, apiOff:'API 离线', copied:'[已复制]',
+      tokens:'编号', now:'刚刚', secAgo:s=>s+' 秒前', minAgo:m=>m+' 分钟前', current:'进行中', done:'已铸完', soon:'即将开始'}
+};
+let LANG='en';
+function applyLang(){
+  document.documentElement.lang=LANG;
+  document.querySelectorAll('[data-'+LANG+']').forEach(el=>el.innerHTML=el.getAttribute('data-'+LANG));
+  document.querySelectorAll('[data-'+LANG+'-ph]').forEach(el=>el.placeholder=el.getAttribute('data-'+LANG+'-ph'));
+  document.getElementById('l-en').classList.toggle('on',LANG==='en');
+  document.getElementById('l-zh').classList.toggle('on',LANG==='zh');
+  setProg(CUR_N); renderBatches(); renderActivity();
+}
+function setLang(l){LANG=l;try{localStorage.setItem('hk_lang',l);}catch(e){} applyLang();}
+
+function copyCmd(){
+  const t=document.getElementById('cmdtxt').textContent;
+  try{navigator.clipboard.writeText(t);document.getElementById('cpcmd').textContent=I18N[LANG].copied;
+    setTimeout(()=>document.getElementById('cpcmd').textContent='[copy]',1200);}catch(e){}
+}
+
+/* ---- api ---- */
+const API=(location.hostname==='localhost'||location.hostname==='127.0.0.1')?'http://127.0.0.1:8211':'/api';
+let CUR=null, CUR_N=0, STATS=null, ACT=[];
+
+function setProg(n){CUR_N=n;const pct=Math.min(100,n/100);
+  document.getElementById('pfill').style.width=pct+'%';
+  document.getElementById('pmin').textContent=I18N[LANG].minted(n);
+  document.getElementById('ppct').textContent=Math.round(pct)+'%';}
+
+/* fallback batch metadata so the section renders even if API is down */
+const BATCH_META=[
+  {level:1,name:'GENESIS',difficulty:'easy',range:[1,2000],price_usd:0},
+  {level:2,name:'CIPHER',difficulty:'medium',range:[2001,4000],price_usd:0.25},
+  {level:3,name:'LATTICE',difficulty:'hard',range:[4001,6000],price_usd:0.5},
+  {level:4,name:'FORGE',difficulty:'harder',range:[6001,8000],price_usd:0.75},
+  {level:5,name:'SINGULARITY',difficulty:'hardest',range:[8001,10000],price_usd:1},
+];
+function priceLabel(p){return (p>0)?(p.toFixed(2)+' U in BNB'):(LANG==='zh'?'免费':'FREE');}
+function renderBatches(){
+  const bs=(STATS&&STATS.batches)?STATS.batches:BATCH_META;
+  const cur=STATS?STATS.batch:1;
+  const ul=document.getElementById('batches');ul.innerHTML='';
+  bs.forEach(b=>{
+    const li=document.createElement('li');
+    const state=b.level<cur?'done':(b.level===cur?'cur':'');
+    li.className=state;
+    const badge=b.level<cur?I18N[LANG].done:(b.level===cur?I18N[LANG].current:I18N[LANG].soon);
+    li.innerHTML='<span class="bno">0'+b.level+'</span>'+
+      '<span class="bmid"><span class="bname">'+b.name+' &middot; '+priceLabel(b.price_usd)+'</span>'+
+      '<br><span class="bsub">'+I18N[LANG].tokens+' '+b.range[0].toLocaleString()+'–'+b.range[1].toLocaleString()+' · '+b.difficulty+'</span></span>'+
+      '<span class="bdiff">'+badge+'</span>';
+    ul.appendChild(li);
+  });
+}
+function ago(ts){const s=Math.max(0,Math.floor(Date.now()/1000-ts));
+  if(s<5)return I18N[LANG].now; if(s<60)return I18N[LANG].secAgo(s); return I18N[LANG].minAgo(Math.floor(s/60));}
+function short(w){return w.slice(0,6)+'…'+w.slice(-4);}
+function renderActivity(){
+  const ul=document.getElementById('act'), empty=document.getElementById('actEmpty');
+  ul.innerHTML='';
+  if(!ACT.length){empty.style.display='block';return;}
+  empty.style.display='none';
+  ACT.slice(0,10).forEach(m=>{
+    const li=document.createElement('li');
+    li.innerHTML='<img src="cat.png" alt="">'+
+      '<span class="aid">HashKitty #'+m.tokenId+'</span>'+
+      '<span class="aw">'+short(m.wallet)+'</span>'+
+      '<span class="ab">B'+m.batch+'</span>'+
+      '<span class="at">'+ago(m.ts)+'</span>';
+    ul.appendChild(li);
+  });
+}
+async function pollStats(){
+  try{const r=await fetch(API+'/stats');STATS=await r.json();setProg(STATS.minted);renderBatches();
+    const pb=document.getElementById('pbatch');
+    if(pb&&STATS){const pr=STATS.price_usd>0?(STATS.price_usd.toFixed(2)+' U in BNB'):(LANG==='zh'?'免费':'FREE');
+      pb.textContent='Batch '+STATS.batch+' '+STATS.batch_name+' · '+pr;}
+  }catch(e){renderBatches();}
+}
+async function pollActivity(){
+  try{const r=await fetch(API+'/activity');const j=await r.json();ACT=j.mints||[];renderActivity();}
+  catch(e){renderActivity();}
+}
+
+/* ---- demo logic ---- */
+const out=document.getElementById('out');
+document.getElementById('getP').onclick=async()=>{
+  const w=document.getElementById('wallet').value.trim(); out.className='out'; out.textContent='';
+  if(!/^0x[0-9a-fA-F]{40}$/.test(w)){out.className='out err';out.textContent=I18N[LANG].needW;return;}
+  try{const r=await fetch(API+'/puzzle?wallet='+w);const j=await r.json();
+    if(j.error){out.className='out err';out.textContent=j.error;return;}
+    CUR=j;document.getElementById('qbox').textContent='['+j.category+'] '+j.prompt;
+    out.textContent=I18N[LANG].loaded;
+  }catch(e){out.className='out err';out.textContent=I18N[LANG].offline;}
+};
+document.getElementById('solveB').onclick=async()=>{
+  const w=document.getElementById('wallet').value.trim();
+  if(!CUR){out.className='out err';out.textContent=I18N[LANG].pullFirst;return;}
+  try{const r=await fetch(API+'/solve',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({wallet:w,pid:CUR.pid,answer:document.getElementById('ans').value.trim()})});
+    const j=await r.json();
+    if(j.correct===true){out.className='out ok';out.textContent=I18N[LANG].correct(j.voucher.nonce.slice(0,14));}
+    else if(j.correct===false){out.className='out err';out.textContent=I18N[LANG].wrong(j.tries_left);}
+    else{out.className='out err';out.textContent=(j.error||'error')+(j.retry_in?(' ('+j.retry_in+'s)'):'');}
+  }catch(e){out.className='out err';out.textContent=I18N[LANG].apiOff;}
+};
+
+/* ---- slideshow strip (tiny feed, not the 2.4MB manifest) ---- */
+fetch('/gallery/slideshow.json').then(r=>r.json()).then(list=>{
+  const pick=list.slice(0,18);
+  const imgs=()=>pick.map(it=>'<img loading="lazy" src="/gallery/'+it.image+'" alt="HashKitty #'+it.id+'">').join('');
+  document.getElementById('ssTrack').innerHTML=imgs()+imgs();  // 2 copies = seamless loop
+}).catch(e=>{});
+
+/* ---- init ---- */
+try{const s=localStorage.getItem('hk_lang');if(s==='zh'||s==='en')LANG=s;}catch(e){}
+applyLang(); setProg(0);
+pollStats(); pollActivity();
+setInterval(pollStats,20000); setInterval(pollActivity,20000);
+</script>
+</body>
+</html>
